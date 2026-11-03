@@ -11,11 +11,13 @@ import {
 
 import { getProducts } from './listSearch/getProducts';
 import { account } from './resources/account';
+import { coupon } from './resources/coupon';
 import { product } from './resources/product';
 import type { HotmartResource } from './shared/types';
 
 const RESOURCES: Record<string, { name: string; resource: HotmartResource }> = {
 	account: { name: 'Account', resource: account },
+	coupon: { name: 'Coupon', resource: coupon },
 	product: { name: 'Product', resource: product },
 };
 
