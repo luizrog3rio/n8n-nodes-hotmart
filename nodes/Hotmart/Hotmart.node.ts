@@ -12,6 +12,9 @@ import {
 import { getProducts } from './listSearch/getProducts';
 import { account } from './resources/account';
 import { coupon } from './resources/coupon';
+import { eventTicket } from './resources/eventTicket';
+import { installmentNegotiation } from './resources/installmentNegotiation';
+import { membersArea } from './resources/membersArea';
 import { product } from './resources/product';
 import { sale } from './resources/sale';
 import { subscription } from './resources/subscription';
@@ -20,6 +23,9 @@ import type { HotmartResource } from './shared/types';
 const RESOURCES: Record<string, { name: string; resource: HotmartResource }> = {
 	account: { name: 'Account', resource: account },
 	coupon: { name: 'Coupon', resource: coupon },
+	eventTicket: { name: 'Event Ticket', resource: eventTicket },
+	installmentNegotiation: { name: 'Installment Negotiation', resource: installmentNegotiation },
+	membersArea: { name: 'Members Area', resource: membersArea },
 	product: { name: 'Product', resource: product },
 	sale: { name: 'Sale', resource: sale },
 	subscription: { name: 'Subscription', resource: subscription },
