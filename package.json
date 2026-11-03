@@ -1,0 +1,52 @@
+{
+	"name": "@luizrog3rio/n8n-nodes-hotmart",
+	"version": "0.1.0",
+	"description": "n8n community node for the Hotmart API: sales, subscriptions, coupons, products, members area, event tickets and webhooks",
+	"license": "MIT",
+	"homepage": "https://github.com/luizrog3rio/n8n-nodes-hotmart",
+	"keywords": [
+		"n8n-community-node-package",
+		"hotmart"
+	],
+	"author": {
+		"name": "Luiz Rogério",
+		"email": "luizrog3rio@rb7digital.com.br"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/luizrog3rio/n8n-nodes-hotmart.git"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"test": "vitest run",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [
+			"dist/credentials/HotmartApi.credentials.js"
+		],
+		"nodes": []
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "*",
+		"eslint": "9.39.4",
+		"n8n-workflow": "^2.46.4",
+		"prettier": "3.8.3",
+		"release-it": "20.2.0",
+		"typescript": "5.9.3",
+		"vitest": "^5.1.0"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}
