@@ -35,7 +35,9 @@
 		"credentials": [
 			"dist/credentials/HotmartApi.credentials.js"
 		],
-		"nodes": []
+		"nodes": [
+			"dist/nodes/Hotmart/Hotmart.node.js"
+		]
 	},
 	"devDependencies": {
 		"@n8n/node-cli": "*",

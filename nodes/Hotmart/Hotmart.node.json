@@ -1,0 +1,14 @@
+{
+	"node": "@luizrog3rio/n8n-nodes-hotmart.hotmart",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Sales", "Marketing & Content"],
+	"resources": {
+		"credentialDocumentation": [
+			{ "url": "https://github.com/luizrog3rio/n8n-nodes-hotmart#credentials" }
+		],
+		"primaryDocumentation": [
+			{ "url": "https://github.com/luizrog3rio/n8n-nodes-hotmart#readme" }
+		]
+	}
+}
