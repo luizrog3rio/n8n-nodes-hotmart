@@ -34,3 +34,12 @@ Read-only calls with `scripts/spike.mjs`, against production (the AprumaPRO acco
 | o4bea0m9 | Parcelado Hotmart via Link Exclusivo | 10,000 | no |
 
 The numeric ID of offer 7gbr9vwq is not exposed by the API.
+
+## Live coupon test (2026-11-03, approved by the user)
+
+Coupon `TESTE-NODE-01` on AprumaPRO, 1%, ending the same day, restricted to offer `15804731`.
+
+- **Without `start_date` the API answers 400** "It was not possible to save a coupon". The node now sends `start_date` = now when the user leaves it empty.
+- **With `start_date`: 200.** The response has `id` (coupon id), `couponCode`, `startDate`, `endDate`, `discount`, `status` and `offers[]`, where each offer has `id` and `key` (the offer code). Offer `15804731` came back as `key: 7gbr9vwq`, "Oferta Oficial": **that is the numeric ID of 7gbr9vwq.**
+- The list endpoint returns items with `id`, `coupon_code`, `discount`, `start_date`, `status`, `time_zone`.
+- **DELETE /products/api/v1/coupon/:id: 200** with no body; the list was empty afterwards.

@@ -37,7 +37,13 @@ export const create: HotmartOperation = {
 			default: {},
 			displayOptions: { show },
 			options: [
-				{ displayName: 'Start Date', name: 'startDate', type: 'dateTime', default: '' },
+				{
+					displayName: 'Start Date',
+					name: 'startDate',
+					type: 'dateTime',
+					default: '',
+					description: 'When the coupon starts working. Empty = now.',
+				},
 				{ displayName: 'End Date', name: 'endDate', type: 'dateTime', default: '' },
 				{
 					displayName: 'Affiliate ID',
@@ -52,7 +58,7 @@ export const create: HotmartOperation = {
 					type: 'string',
 					default: '',
 					placeholder: 'e.g. 123456, 789012',
-					description: 'Numeric offer IDs the coupon applies to, comma-separated. Get Offers only returns offer codes, not these IDs: copy the ID from the offer in the Hotmart dashboard. Empty = every offer of the product, including higher-priced ones.',
+					description: 'Numeric offer IDs the coupon applies to, comma-separated. Get Offers only returns offer codes, not these IDs: find the ID in the Hotmart dashboard (the coupon response lists each offer with its code as "key", so you can confirm it). Empty = every offer of the product, including higher-priced ones.',
 				},
 			],
 		},
@@ -82,10 +88,13 @@ export const create: HotmartOperation = {
 			});
 		}
 
-		const body: IDataObject = { code, discount };
-		const startDate = toEpochMs(options.startDate as string, timezone);
+		// Hotmart answers 400 "not possible to save a coupon" without a start date, so it defaults to now.
+		const body: IDataObject = {
+			code,
+			discount,
+			start_date: toEpochMs(options.startDate as string, timezone) ?? Date.now(),
+		};
 		const endDate = toEpochMs(options.endDate as string, timezone, { endOfDay: true });
-		if (startDate !== undefined) body.start_date = startDate;
 		if (endDate !== undefined) body.end_date = endDate;
 		if (options.affiliateId) body.affiliate = options.affiliateId;
 		if (offerIds.length) body.offer_ids = offerIds;
