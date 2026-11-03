@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0-beta.2 (2026-11-03)
+
+- Credential help and README: if you restrict Allowed HTTP Request Domains, allow both `developers.hotmart.com` and `api-sec-vlc.hotmart.com`, separated by a comma.
+- First release published with npm Trusted Publishing (no npm token in the repository).
+
 ## 0.1.0-beta.1 (2026-11-03)
 
 - Nodes renamed to **Hotmart API** and **Hotmart API Trigger**. n8n keys installed community nodes by display name, so the old names clashed with the older `n8n-nodes-hotmart` package and the install failed with "duplicate key value violates unique constraint". Both packages can now be installed side by side.

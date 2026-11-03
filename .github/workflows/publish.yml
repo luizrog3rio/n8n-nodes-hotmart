@@ -106,3 +106,16 @@ jobs:
           npm run release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # While every published version is a prerelease, "latest" would stay on the first one
+      # (npm sets it on the first publish only). Move it to this beta until a stable release exists.
+      - name: Keep latest on the newest beta
+        if: contains(github.ref_name, '-')
+        continue-on-error: true
+        run: |
+          PKG=$(node -p "require('./package.json').name")
+          LATEST=$(npm view "$PKG" dist-tags.latest)
+          case "$LATEST" in
+            *-*) npm dist-tag add "$PKG@$GITHUB_REF_NAME" latest ;;
+            *) echo "latest is a stable release ($LATEST), leaving it" ;;
+          esac
