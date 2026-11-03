@@ -17,6 +17,9 @@
 
 Pending the first live test. This list shrinks as operations are confirmed; any that fail are removed before 0.1.0.
 
+- Confirmed live inside n8n (queue mode, 2 workers): Coupon → Create, Get Many and Delete (12/12 runs); Hotmart API Trigger with the right hottok (also with surrounding spaces), wrong or missing hottok (401) and the event filter (ignored); Sale → Get History and Subscription → Get Switch Plan Options on sandbox.
+- Sale → Refund: route confirmed in production (a fake transaction returns "Purchase not found"); not run on a real sale. Hotmart sandbox does not expose write routes (404).
+- Not yet confirmed: Subscription → Cancel, Cancel Many, Reactivate, Reactivate Many, Change Due Day, Switch Plan; Sale → Generate New Billet; Installment Negotiation; Members Area; Event Ticket; Product → Update Email Settings. The sandbox answers 404 for these routes and the production account has no subscription to test on.
 - Confirmed live inside n8n (0.1.0-beta.1): credential test with token, Account → Get Me, Product → Get Many and Get Offers, Coupon → Get Many.
 - Confirmed live against the API: credential (token + test), Coupon → Create, Get Many and Delete (production), Account → Get Me (production only; 404 on sandbox), Product → Get Many, Product → Get Offers (production only), Sale → Get History and Subscription → Get Many (sandbox).
 - Not yet confirmed: every other operation, Get Plans and Get Switch Plan Options on a subscription product, all writes, and the trigger.
