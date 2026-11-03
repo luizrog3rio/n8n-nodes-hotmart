@@ -58,7 +58,7 @@ Hotmart does not offer an API to register webhooks, so this step is manual.
 
 Built with `@n8n/node-cli` for n8n 2.x. No runtime dependencies.
 
-> **Status: beta.** Every operation is checked against the official Hotmart docs and covered by unit tests where it has logic, but not every one has been run against a live account yet. Operations not yet confirmed against the real API are listed in the [changelog](CHANGELOG.md).
+> **Status.** Coupons, products, account, sales history and the trigger are tested live inside n8n. Subscription writes (cancel, reactivate, due day, switch plan), new billet, installment negotiation, members area and event tickets follow the official Hotmart docs but have not been run against a live account yet: Hotmart's sandbox does not expose those routes. See the [changelog](CHANGELOG.md).
 
 ## License
 

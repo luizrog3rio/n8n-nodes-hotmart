@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.0 (2026-11-03)
+
+- First stable release. Same code as 0.1.0-beta.2; see the beta entries below for what is confirmed live and what is not.
+
 ## 0.1.0-beta.2 (2026-11-03)
 
 - Credential help and README: if you restrict Allowed HTTP Request Domains, allow both `developers.hotmart.com` and `api-sec-vlc.hotmart.com`, separated by a comma.
@@ -15,7 +19,7 @@
 
 ### Not yet run against a live Hotmart account
 
-Pending the first live test. This list shrinks as operations are confirmed; any that fail are removed before 0.1.0.
+Live test results so far. Operations listed as not confirmed follow the official docs but have not been run against a live account.
 
 - Confirmed live inside n8n (queue mode, 2 workers): Coupon → Create, Get Many and Delete (12/12 runs); Hotmart API Trigger with the right hottok (also with surrounding spaces), wrong or missing hottok (401) and the event filter (ignored); Sale → Get History and Subscription → Get Switch Plan Options on sandbox.
 - Sale → Refund: route confirmed in production (a fake transaction returns "Purchase not found"); not run on a real sale. Hotmart sandbox does not expose write routes (404).
