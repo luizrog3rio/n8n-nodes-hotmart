@@ -8,4 +8,5 @@
 
 Pending the first live test. This list shrinks as operations are confirmed; any that fail are removed before 0.1.0.
 
-- All operations and the trigger.
+- Confirmed live: credential (token + test), Account → Get Me (production only; 404 on sandbox), Product → Get Many, Product → Get Offers (production only), Sale → Get History and Subscription → Get Many (sandbox).
+- Not yet confirmed: every other operation, Get Plans and Get Switch Plan Options on a subscription product, all writes, and the trigger.

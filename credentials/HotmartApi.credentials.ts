@@ -105,7 +105,9 @@ export class HotmartApi implements ICredentialType {
 		request: {
 			baseURL:
 				'={{$credentials.environment === "sandbox" ? "https://sandbox.hotmart.com" : "https://developers.hotmart.com"}}',
-			url: '/user/api/v1/me',
+			// /user/api/v1/me is 404 on sandbox; the product list answers on both environments.
+			url: '/products/api/v1/products',
+			qs: { max_results: 1 },
 			method: 'GET',
 		},
 	};

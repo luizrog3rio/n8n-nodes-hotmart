@@ -52,7 +52,7 @@ export const create: HotmartOperation = {
 					type: 'string',
 					default: '',
 					placeholder: 'e.g. 123456, 789012',
-					description: 'Numeric offer IDs the coupon applies to, comma-separated. Use Product → Get Offers to find them. Empty = all offers.',
+					description: 'Numeric offer IDs the coupon applies to, comma-separated. Get Offers only returns offer codes, not these IDs: copy the ID from the offer in the Hotmart dashboard. Empty = every offer of the product, including higher-priced ones.',
 				},
 			],
 		},
