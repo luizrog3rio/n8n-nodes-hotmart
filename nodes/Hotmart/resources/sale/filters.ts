@@ -16,7 +16,7 @@ export const STATUS_HINT = 'Without "Transaction Status", Hotmart returns only A
 export const f = {
 	productId: { field: number('Product ID', 'productId'), query: 'product_id' },
 	startDate: { field: date('Start Date', 'startDate'), query: 'start_date', kind: 'date' },
-	endDate: { field: date('End Date', 'endDate'), query: 'end_date', kind: 'date' },
+	endDate: { field: date('End Date', 'endDate'), query: 'end_date', kind: 'endDate' },
 	transaction: { field: text('Transaction', 'transaction', 'Transaction code, e.g. HP02316330308193'), query: 'transaction' },
 	transactionStatus: {
 		field: choice('Transaction Status', 'transactionStatus', TRANSACTION_STATUS, STATUS_HINT),

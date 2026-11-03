@@ -1,4 +1,9 @@
-import type { IDataObject, IExecuteFunctions, INodeProperties } from 'n8n-workflow';
+import {
+	NodeOperationError,
+	type IDataObject,
+	type IExecuteFunctions,
+	type INodeProperties,
+} from 'n8n-workflow';
 
 type Show = { resource: string[]; operation: string[] };
 
@@ -43,9 +48,18 @@ export function productPicker(
 	};
 }
 
-export function getProductId(this: IExecuteFunctions, i: number): number | undefined {
-	const value = this.getNodeParameter('productId', i, '', { extractValue: true }) as string | number;
-	return value === '' || value === undefined ? undefined : Number(value);
+/** Product ID from the picker. Fails loudly: an empty ID would make Hotmart answer for another product. */
+export function getProductId(this: IExecuteFunctions, i: number): number {
+	const value = this.getNodeParameter('productId', i, '', { extractValue: true }) as unknown;
+	const id = Number(value);
+	if (value === '' || value === undefined || value === null || !Number.isInteger(id) || id <= 0) {
+		throw new NodeOperationError(
+			this.getNode(),
+			`Choose a product: the product ID must be a positive whole number (got "${String(value ?? '')}")`,
+			{ itemIndex: i },
+		);
+	}
+	return id;
 }
 
 export function returnAllAndLimit(resource: string, operation: string | string[]): INodeProperties[] {

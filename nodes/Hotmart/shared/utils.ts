@@ -28,15 +28,29 @@ const LOCAL_DATE_TIME = /^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2})(?::(\d{2
 /**
  * Converts a date to epoch milliseconds, as the Hotmart API expects.
  * Dates without an offset ("2026-11-01" or "2026-11-01T10:00:00") are read in `timezone`.
+ * With `endOfDay`, a date without a time (or at midnight, as the n8n date picker sends it)
+ * means the last millisecond of that day, so "until 2026-11-30" still includes the 30th.
  */
-export function toEpochMs(value: string | number | undefined, timezone: string): number | undefined {
+export function toEpochMs(
+	value: string | number | undefined,
+	timezone: string,
+	opts: { endOfDay?: boolean } = {},
+): number | undefined {
 	if (value === undefined || value === null || value === '') return undefined;
 	if (typeof value === 'number') return value;
 
 	const local = LOCAL_DATE_TIME.exec(value.trim());
 	if (local) {
-		const [, y, mo, d, h = '0', mi = '0', s = '0'] = local;
-		const wall = Date.UTC(+y, +mo - 1, +d, +h, +mi, +s);
+		const [, y, mo, d, h, mi = '0', s = '0'] = local;
+		const midnight = h === undefined || (+h === 0 && +mi === 0 && +s === 0);
+		if (opts.endOfDay && midnight) {
+			const nextDayStart = toEpochMs(
+				new Date(Date.UTC(+y, +mo - 1, +d + 1)).toISOString().slice(0, 10),
+				timezone,
+			) as number;
+			return nextDayStart - 1;
+		}
+		const wall = Date.UTC(+y, +mo - 1, +d, +(h ?? 0), +mi, +s);
 		let result = wall - timezoneOffsetMs(wall, timezone);
 		const corrected = wall - timezoneOffsetMs(result, timezone);
 		if (corrected !== result) result = corrected;

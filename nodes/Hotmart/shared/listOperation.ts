@@ -7,12 +7,13 @@ import { toEpochMs } from './utils';
 
 /**
  * A filter of a list operation: the n8n field plus the Hotmart query parameter it maps to.
- * `kind: 'date'` converts to epoch ms; `kind: 'list'` splits "a, b" into an array.
+ * `kind: 'date'` converts to epoch ms (`'endDate'`: a date without time means the end of that day);
+ * `kind: 'list'` splits "a, b" into an array.
  */
 export interface ListFilter {
 	field: INodeProperties;
 	query: string;
-	kind?: 'date' | 'list';
+	kind?: 'date' | 'endDate' | 'list';
 }
 
 export function listOperation(options: {
@@ -44,7 +45,9 @@ export function listOperation(options: {
 			for (const { field, query, kind } of options.filters) {
 				const value = filters[field.name];
 				if (value === undefined || value === '' || value === 0) continue;
-				if (kind === 'date') qs[query] = toEpochMs(value as string, timezone);
+				if (kind === 'date' || kind === 'endDate') {
+					qs[query] = toEpochMs(value as string, timezone, { endOfDay: kind === 'endDate' });
+				}
 				else if (kind === 'list') qs[query] = Array.isArray(value) ? value : splitList(value);
 				else qs[query] = value;
 			}

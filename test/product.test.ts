@@ -22,3 +22,12 @@ describe('resolveProductUcode', () => {
 		);
 	});
 });
+
+describe('resolveProductUcode safety', () => {
+	it('rejects a product whose id does not match the requested one', async () => {
+		const { context } = fakeContext(() => ({ items: [{ id: 999, ucode: 'other-product' }] }));
+		await expect(resolveProductUcode.call(context, 123)).rejects.toThrow(
+			'Product 123 not found in this Hotmart account',
+		);
+	});
+});

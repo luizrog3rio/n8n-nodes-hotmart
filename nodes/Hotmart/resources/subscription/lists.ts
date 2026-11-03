@@ -44,7 +44,7 @@ const f = {
 	endAccessionDate: {
 		field: date('Accession Date To', 'endAccessionDate'),
 		query: 'end_accession_date',
-		kind: 'date',
+		kind: 'endDate',
 	},
 	cancelationDate: {
 		field: date('Cancellation Date From', 'cancelationDate'),
@@ -54,13 +54,13 @@ const f = {
 	endCancelationDate: {
 		field: date('Cancellation Date To', 'endCancelationDate'),
 		query: 'end_cancelation_date',
-		kind: 'date',
+		kind: 'endDate',
 	},
 	dateNextCharge: { field: date('Next Charge From', 'dateNextCharge'), query: 'date_next_charge', kind: 'date' },
 	endDateNextCharge: {
 		field: date('Next Charge To', 'endDateNextCharge'),
 		query: 'end_date_next_charge',
-		kind: 'date',
+		kind: 'endDate',
 	},
 	transactionDate: {
 		field: date('Transaction Date From', 'transactionDate'),
@@ -70,7 +70,7 @@ const f = {
 	endTransactionDate: {
 		field: date('Transaction Date To', 'endTransactionDate'),
 		query: 'end_transaction_date',
-		kind: 'date',
+		kind: 'endDate',
 	},
 } satisfies Record<string, ListFilter>;
 

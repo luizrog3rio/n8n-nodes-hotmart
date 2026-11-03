@@ -1,10 +1,16 @@
 import { listOperation } from '../../shared/listOperation';
 import { buildResource } from '../../shared/types';
-import { base, f } from './filters';
+import { base, f, STATUS_HINT } from './filters';
 import { generateNewBillet, refund } from './writes';
 
 const list = (operation: string, path: string, extra: typeof base) =>
-	listOperation({ resource: 'sale', operation, path: `/payments/api/v1/sales/${path}`, filters: [...base, ...extra] });
+	listOperation({
+		resource: 'sale',
+		operation,
+		path: `/payments/api/v1/sales/${path}`,
+		filters: [...base, ...extra],
+		hint: STATUS_HINT,
+	});
 
 export const sale = buildResource(
 	'sale',

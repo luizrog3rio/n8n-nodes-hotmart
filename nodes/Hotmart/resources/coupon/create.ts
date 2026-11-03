@@ -26,8 +26,7 @@ export const create: HotmartOperation = {
 			type: 'number',
 			default: 10,
 			required: true,
-			typeOptions: { minValue: 1, maxValue: 99, numberPrecision: 0 },
-			hint: 'Whole percentage: 90 = 90% off',
+			hint: 'Whole percentage from 1 to 99: 90 = 90% off',
 			displayOptions: { show },
 		},
 		{
@@ -85,7 +84,7 @@ export const create: HotmartOperation = {
 
 		const body: IDataObject = { code, discount };
 		const startDate = toEpochMs(options.startDate as string, timezone);
-		const endDate = toEpochMs(options.endDate as string, timezone);
+		const endDate = toEpochMs(options.endDate as string, timezone, { endOfDay: true });
 		if (startDate !== undefined) body.start_date = startDate;
 		if (endDate !== undefined) body.end_date = endDate;
 		if (options.affiliateId) body.affiliate = options.affiliateId;

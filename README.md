@@ -54,7 +54,9 @@ Hotmart does not offer an API to register webhooks, so this step is manual.
 
 ## Compatibility
 
-Built with `@n8n/node-cli` and tested on n8n 2.x. No runtime dependencies.
+Built with `@n8n/node-cli` for n8n 2.x. No runtime dependencies.
+
+> **Status: beta.** Every operation is checked against the official Hotmart docs and covered by unit tests where it has logic, but not every one has been run against a live account yet. Operations not yet confirmed against the real API are listed in the [changelog](CHANGELOG.md).
 
 ## License
 

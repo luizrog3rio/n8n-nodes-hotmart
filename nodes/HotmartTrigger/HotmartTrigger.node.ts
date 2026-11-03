@@ -11,7 +11,7 @@ import {
 	type IWebhookResponseData,
 } from 'n8n-workflow';
 
-import { checkHottok, HOTMART_EVENTS, shouldTrigger } from './events';
+import { checkHottok, HOTMART_EVENTS, loadExpectedHottok, shouldTrigger } from './events';
 
 export class HotmartTrigger implements INodeType {
 	description: INodeTypeDescription = {
@@ -88,10 +88,13 @@ export class HotmartTrigger implements INodeType {
 	async webhook(this: IWebhookFunctions): Promise<IWebhookResponseData> {
 		let expectedHottok: string | undefined;
 		try {
-			const credentials = await this.getCredentials('hotmartWebhookApi');
-			expectedHottok = (credentials.hottok as string | undefined) || undefined;
+			expectedHottok = await loadExpectedHottok(
+				Boolean(this.getNode().credentials?.hotmartWebhookApi),
+				async () => (await this.getCredentials('hotmartWebhookApi')).hottok as string | undefined,
+			);
 		} catch {
-			expectedHottok = undefined;
+			this.getResponseObject().status(500).send('Could not read the Hotmart Webhook credential');
+			return { noWebhookResponse: true };
 		}
 
 		const headers = this.getHeaderData() as IDataObject;

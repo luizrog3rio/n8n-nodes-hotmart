@@ -7,7 +7,9 @@ export async function resolveProductUcode(this: IExecuteFunctions, productId: nu
 	const response = await hotmartApiRequest.call(this, 'GET', '/products/api/v1/products', {
 		id: productId,
 	});
-	const product = ((response.items ?? []) as IDataObject[])[0];
+	const product = ((response.items ?? []) as IDataObject[]).find(
+		(p) => String(p.id) === String(productId),
+	);
 	if (!product?.ucode) {
 		throw new NodeOperationError(this.getNode(), `Product ${productId} not found in this Hotmart account`);
 	}

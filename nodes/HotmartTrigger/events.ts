@@ -18,11 +18,26 @@ export const HOTMART_EVENTS: ReadonlyArray<{ name: string; value: string }> = [
 	{ name: 'Order Fulfillment', value: 'ORDER_FULFILLMENT' },
 ];
 
-/** True when no hottok is configured, or when the received header matches it exactly. */
+/** True when no hottok is configured, or when the received header matches it (ignoring surrounding spaces). */
 export function checkHottok(expected: string | undefined, received: string | string[] | undefined): boolean {
-	if (!expected) return true;
+	const wanted = expected?.trim();
+	if (!wanted) return true;
 	const value = Array.isArray(received) ? received[0] : received;
-	return value === expected;
+	return value?.trim() === wanted;
+}
+
+/**
+ * Hottok to validate against. No credential on the node → undefined (accept all, as documented).
+ * A credential that is set but unreadable or empty must fail closed, never accept everything.
+ */
+export async function loadExpectedHottok(
+	hasCredential: boolean,
+	load: () => Promise<string | undefined>,
+): Promise<string | undefined> {
+	if (!hasCredential) return undefined;
+	const hottok = (await load())?.trim();
+	if (!hottok) throw new Error('The Hotmart Webhook credential has an empty hottok');
+	return hottok;
 }
 
 /** An empty selection means "every event"; a payload without an event never triggers. */

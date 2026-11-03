@@ -61,3 +61,23 @@ describe('cleanQuery', () => {
 		});
 	});
 });
+
+describe('toEpochMs end of day', () => {
+	it('date-only end dates include the whole day', () => {
+		expect(toEpochMs('2026-11-30', 'America/Sao_Paulo', { endOfDay: true })).toBe(
+			Date.UTC(2026, 11, 1, 3) - 1,
+		);
+	});
+
+	it('end of day also applies to midnight, which is what the n8n date picker sends', () => {
+		expect(toEpochMs('2026-11-30T00:00:00', 'America/Sao_Paulo', { endOfDay: true })).toBe(
+			Date.UTC(2026, 11, 1, 3) - 1,
+		);
+	});
+
+	it('end of day does not touch values with a time', () => {
+		expect(toEpochMs('2026-11-30T10:00:00Z', 'America/Sao_Paulo', { endOfDay: true })).toBe(
+			Date.UTC(2026, 10, 30, 10),
+		);
+	});
+});
