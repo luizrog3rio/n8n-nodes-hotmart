@@ -33,14 +33,14 @@ const RESOURCES: Record<string, { name: string; resource: HotmartResource }> = {
 
 export class Hotmart implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Hotmart',
+		displayName: 'Hotmart API',
 		name: 'hotmart',
 		icon: { light: 'file:../../icons/hotmart.svg', dark: 'file:../../icons/hotmart.dark.svg' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Work with sales, subscriptions, coupons, products and more in Hotmart',
-		defaults: { name: 'Hotmart' },
+		defaults: { name: 'Hotmart API' },
 		usableAsTool: true,
 		inputs: [NodeConnectionTypes.Main],
 		outputs: [NodeConnectionTypes.Main],

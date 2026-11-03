@@ -1,6 +1,6 @@
 {
 	"name": "@luizrog3rio/n8n-nodes-hotmart",
-	"version": "0.1.0-beta.0",
+	"version": "0.1.0-beta.1",
 	"description": "n8n community node for the Hotmart API: sales, subscriptions, coupons, products, members area, event tickets and webhooks",
 	"license": "MIT",
 	"homepage": "https://github.com/luizrog3rio/n8n-nodes-hotmart",

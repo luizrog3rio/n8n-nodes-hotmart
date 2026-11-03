@@ -15,14 +15,14 @@ import { checkHottok, HOTMART_EVENTS, loadExpectedHottok, shouldTrigger } from '
 
 export class HotmartTrigger implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Hotmart Trigger',
+		displayName: 'Hotmart API Trigger',
 		name: 'hotmartTrigger',
 		icon: { light: 'file:../../icons/hotmart.svg', dark: 'file:../../icons/hotmart.dark.svg' },
 		group: ['trigger'],
 		version: 1,
 		subtitle: '={{$parameter["events"].length ? $parameter["events"].join(", ") : "All events"}}',
 		description: 'Starts the workflow when Hotmart sends a webhook (purchases, subscriptions, members area)',
-		defaults: { name: 'Hotmart Trigger' },
+		defaults: { name: 'Hotmart API Trigger' },
 		inputs: [],
 		outputs: [NodeConnectionTypes.Main],
 		credentials: [{ name: 'hotmartWebhookApi', required: false, testedBy: 'hotmartWebhookApiTest' }],

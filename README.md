@@ -45,7 +45,7 @@ Things worth knowing:
 
 ## Webhook
 
-1. Add a **Hotmart Trigger** node and pick the events (empty = all).
+1. Add a **Hotmart API Trigger** node and pick the events (empty = all).
 2. Copy its **Production URL**.
 3. In Hotmart, **Tools → Webhook → Add**, paste the URL, pick the product and events, and choose version **2.0.0**.
 4. Activate the workflow.
@@ -72,7 +72,7 @@ Node da comunidade pro n8n que conversa com a API da Hotmart: vendas, assinatura
 
 **Credencial "Hotmart API":** na Hotmart, *Ferramentas → Credenciais Hotmart*, crie a credencial (produção ou sandbox) e copie Client ID, Client Secret e o token Basic. Eles só aparecem uma vez. No n8n, escolha o mesmo ambiente e cole os três, com o Basic inteiro (incluindo `Basic `). O token renova sozinho.
 
-**Webhook:** use o node *Hotmart Trigger*, copie a *Production URL* e cole em *Ferramentas → Webhook* na Hotmart, versão 2.0.0. Pra validar as chamadas, crie a credencial "Hotmart Webhook" com o seu hottok.
+**Webhook:** use o node *Hotmart API Trigger*, copie a *Production URL* e cole em *Ferramentas → Webhook* na Hotmart, versão 2.0.0. Pra validar as chamadas, crie a credencial "Hotmart Webhook" com o seu hottok.
 
 **Atenção:**
 - O desconto do cupom é em porcentagem inteira (`90` = 90% off).
