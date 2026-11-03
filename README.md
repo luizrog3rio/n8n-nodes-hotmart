@@ -18,6 +18,8 @@ In n8n: **Settings → Community Nodes → Install** and enter `@luizrog3rio/n8n
 
 The node gets the access token and renews it automatically when it expires (every ~48h).
 
+If you restrict **Allowed HTTP Request Domains** on the credential, allow both hosts, **separated by a comma** (n8n reads a line break as part of the name): `developers.hotmart.com,api-sec-vlc.hotmart.com`. For sandbox: `sandbox.hotmart.com,api-sec-vlc.hotmart.com`. The token comes from `api-sec-vlc.hotmart.com`, so leaving it out fails the credential test with "Domain not allowed".
+
 ### Hotmart Webhook (optional)
 
 Holds your account **hottok** (Hotmart → Tools → Webhook). When set, the trigger rejects requests whose `X-HOTMART-HOTTOK` header does not match.
@@ -70,7 +72,7 @@ Node da comunidade pro n8n que conversa com a API da Hotmart: vendas, assinatura
 
 **Instalar:** no n8n, *Settings → Community Nodes → Install* e digite `@luizrog3rio/n8n-nodes-hotmart`.
 
-**Credencial "Hotmart API":** na Hotmart, *Ferramentas → Credenciais Hotmart*, crie a credencial (produção ou sandbox) e copie Client ID, Client Secret e o token Basic. Eles só aparecem uma vez. No n8n, escolha o mesmo ambiente e cole os três, com o Basic inteiro (incluindo `Basic `). O token renova sozinho.
+**Credencial "Hotmart API":** na Hotmart, *Ferramentas → Credenciais Hotmart*, crie a credencial (produção ou sandbox) e copie Client ID, Client Secret e o token Basic. Eles só aparecem uma vez. No n8n, escolha o mesmo ambiente e cole os três, com o Basic inteiro (incluindo `Basic `). O token renova sozinho. Se restringir os domínios da credencial, libere os dois separados por vírgula: `developers.hotmart.com,api-sec-vlc.hotmart.com`.
 
 **Webhook:** use o node *Hotmart API Trigger*, copie a *Production URL* e cole em *Ferramentas → Webhook* na Hotmart, versão 2.0.0. Pra validar as chamadas, crie a credencial "Hotmart Webhook" com o seu hottok.
 

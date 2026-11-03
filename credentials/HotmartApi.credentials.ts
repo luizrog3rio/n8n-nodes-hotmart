@@ -22,7 +22,7 @@ export class HotmartApi implements ICredentialType {
 	properties: INodeProperties[] = [
 		{
 			displayName:
-				'Create the credentials in Hotmart → Tools → Hotmart Credentials. The keys are shown only once, right after creation.',
+				'Create the credentials in Hotmart → Tools → Hotmart Credentials. The keys are shown only once, right after creation. If you restrict Allowed HTTP Request Domains, allow both hosts separated by a comma: developers.hotmart.com,api-sec-vlc.hotmart.com (sandbox: sandbox.hotmart.com,api-sec-vlc.hotmart.com).',
 			name: 'notice',
 			type: 'notice',
 			default: '',
