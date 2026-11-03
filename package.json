@@ -33,10 +33,12 @@
 		"n8nNodesApiVersion": 1,
 		"strict": true,
 		"credentials": [
-			"dist/credentials/HotmartApi.credentials.js"
+			"dist/credentials/HotmartApi.credentials.js",
+			"dist/credentials/HotmartWebhookApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/Hotmart/Hotmart.node.js"
+			"dist/nodes/Hotmart/Hotmart.node.js",
+			"dist/nodes/HotmartTrigger/HotmartTrigger.node.js"
 		]
 	},
 	"devDependencies": {
