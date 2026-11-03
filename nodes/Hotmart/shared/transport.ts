@@ -63,6 +63,7 @@ export async function hotmartApiRequest(
 		method,
 		url: `${getBaseUrl(credentials.environment as HotmartEnvironment)}${path}`,
 		qs: cleanQuery(qs),
+		arrayFormat: 'repeat',
 		json: true,
 	};
 	if (body !== undefined) options.body = body;

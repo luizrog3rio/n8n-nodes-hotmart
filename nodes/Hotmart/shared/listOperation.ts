@@ -45,7 +45,7 @@ export function listOperation(options: {
 				const value = filters[field.name];
 				if (value === undefined || value === '' || value === 0) continue;
 				if (kind === 'date') qs[query] = toEpochMs(value as string, timezone);
-				else if (kind === 'list') qs[query] = splitList(value);
+				else if (kind === 'list') qs[query] = Array.isArray(value) ? value : splitList(value);
 				else qs[query] = value;
 			}
 			return await hotmartApiRequestAllItems.call(

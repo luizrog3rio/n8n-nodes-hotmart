@@ -14,6 +14,7 @@ import { account } from './resources/account';
 import { coupon } from './resources/coupon';
 import { product } from './resources/product';
 import { sale } from './resources/sale';
+import { subscription } from './resources/subscription';
 import type { HotmartResource } from './shared/types';
 
 const RESOURCES: Record<string, { name: string; resource: HotmartResource }> = {
@@ -21,6 +22,7 @@ const RESOURCES: Record<string, { name: string; resource: HotmartResource }> = {
 	coupon: { name: 'Coupon', resource: coupon },
 	product: { name: 'Product', resource: product },
 	sale: { name: 'Sale', resource: sale },
+	subscription: { name: 'Subscription', resource: subscription },
 };
 
 export class Hotmart implements INodeType {

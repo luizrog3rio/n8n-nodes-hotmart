@@ -37,6 +37,12 @@ describe('hotmartApiRequest', () => {
 		expect(requests[0].url).toBe('https://sandbox.hotmart.com/user/api/v1/me');
 	});
 
+	it('sends array filters as repeated query params', async () => {
+		const { context, requests } = fakeContext(() => ({}));
+		await hotmartApiRequest.call(context, 'GET', '/x', { status: ['ACTIVE', 'DELAYED'] });
+		expect(requests[0].arrayFormat).toBe('repeat');
+	});
+
 	it('cleans the query string', async () => {
 		const { context, requests } = fakeContext(() => ({}));
 		await hotmartApiRequest.call(context, 'GET', '/x', { a: 1, b: '', c: undefined });
