@@ -1,0 +1,39 @@
+# Points an npm dist-tag (usually "latest") at an already published version.
+# Run it from the Actions tab or with:
+#   gh workflow run dist-tag.yml -f version=0.1.0-beta.1 -f tag=latest
+#
+# Needed while the package only has prereleases: the first publish became "latest"
+# and later betas only move the "beta" tag, so "latest" would stay behind.
+
+name: Dist-tag
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Published version, e.g. 0.1.0-beta.1
+        required: true
+      tag:
+        description: Dist-tag to move
+        required: true
+        default: latest
+
+jobs:
+  dist-tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Move dist-tag
+        run: |
+          npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+          npm dist-tag add "@luizrog3rio/n8n-nodes-hotmart@${VERSION}" "$TAG"
+          npm dist-tag ls @luizrog3rio/n8n-nodes-hotmart
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          VERSION: ${{ inputs.version }}
+          TAG: ${{ inputs.tag }}
