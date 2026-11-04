@@ -42,9 +42,15 @@ export const create: HotmartOperation = {
 					name: 'startDate',
 					type: 'dateTime',
 					default: '',
-					description: 'When the coupon starts working. Empty = now.',
+					description: 'When the coupon starts working, in the Hotmart account timezone. Empty = active right away.',
 				},
-				{ displayName: 'End Date', name: 'endDate', type: 'dateTime', default: '' },
+				{
+					displayName: 'End Date',
+					name: 'endDate',
+					type: 'dateTime',
+					default: '',
+					description: 'Last day the coupon works, in the Hotmart account timezone. Empty = no expiry.',
+				},
 				{
 					displayName: 'Affiliate ID',
 					name: 'affiliateId',
@@ -80,7 +86,6 @@ export const create: HotmartOperation = {
 		}
 
 		const options = this.getNodeParameter('options', i, {}) as IDataObject;
-		const timezone = this.getTimezone();
 		const offerIds = splitList(options.offerIds).map(Number);
 		if (offerIds.some((id) => !Number.isInteger(id))) {
 			throw new NodeOperationError(this.getNode(), 'Offer IDs must be numbers separated by commas', {
@@ -88,13 +93,16 @@ export const create: HotmartOperation = {
 			});
 		}
 
-		// Hotmart answers 400 "not possible to save a coupon" without a start date, so it defaults to now.
+		// Hotmart reads coupon dates as wall-clock time in the account's timezone (an epoch for
+		// 10:00 UTC means 10:00 in Brasília), so dates are sent as UTC wall-clock. It also answers
+		// 400 without a start date, and "now" would land in the future and leave the coupon "soon":
+		// the default is one day ago.
 		const body: IDataObject = {
 			code,
 			discount,
-			start_date: toEpochMs(options.startDate as string, timezone) ?? Date.now(),
+			start_date: toEpochMs(options.startDate as string, 'UTC') ?? Date.now() - 24 * 60 * 60 * 1000,
 		};
-		const endDate = toEpochMs(options.endDate as string, timezone, { endOfDay: true });
+		const endDate = toEpochMs(options.endDate as string, 'UTC', { endOfDay: true });
 		if (endDate !== undefined) body.end_date = endDate;
 		if (options.affiliateId) body.affiliate = options.affiliateId;
 		if (offerIds.length) body.offer_ids = offerIds;
