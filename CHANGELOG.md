@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.1 (unreleased)
+## 0.1.1 (2026-11-04)
 
 - Coupon → Create: Hotmart reads coupon dates as wall-clock time in the account timezone, so a start date of "now" landed 3 hours in the future (Brasília) and the coupon stayed "soon". The start date now defaults to one day ago, and chosen dates are sent as wall-clock time. End date stays optional: empty = no expiry.
 
